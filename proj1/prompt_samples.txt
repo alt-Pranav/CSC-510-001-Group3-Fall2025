@@ -1,0 +1,933 @@
+
+
+CSC_510_001_Proj1a1_Group3_Report.pdf
+405 lines
+
+pdf
+
+
+You are an expert requirements analyst. Using ONLY the provided CONTEXT, generate whatever is asked for a FOOD DELIVERY APPLICATION in the precise format shown below. Your output MUST comply with every rule here.
+
+STRICT FORMAT (match EXACTLY; no colons after headings; each item on its own line):
+UC# <Title>
+<one-sentence summary>
+Preconditions
+<precondition line 1>
+<precondition line 2>
+Main Flow
+<step sentence ending with bracketed refs, e.g., ... [S1] [A1]>
+<step sentence ... [S2]>
+<step sentence ... [S3] [A2]>
+Subflows
+ [S1] <subflow description for S1>
+ [S2] <subflow description for S2>
+ [S3] <subflow description for S3>
+Alternative Flows
+ [A1] <alt description for A1>
+ [A2] <alt description for A2>
+
+HARD REQUIREMENTS
+- Title line must start with: UC# <Title> (e.g., UC1 Browse Restaurants by Location).
+- The second line is a single-sentence summary.
+- Section headers are exactly: Preconditions, Main Flow, Subflows, Alternative Flows — on their own lines, with NO trailing colon.
+- In Main Flow, EVERY operational step is a single line that ends with bracketed references to the subflows/alternatives it depends on, e.g., [S2] [A1]. Use [S#] for subflows and [A#] for alternative flows.
+- In Subflows, define ONLY the [S#] identifiers that appear in that use case’s Main Flow, one per line, prefixed with a space then the bracketed ID (e.g., " [S1] ...").
+- In Alternative Flows, define ONLY the [A#] identifiers that appear in that use case’s Main Flow, one per line, prefixed similarly.
+- Numbering for S# and A# restarts within each use case: [S1], [S2], … and [A1], [A2], …
+- Number the 10 new use cases UC1..UC10 (for THIS batch).
+- NO bullets other than the bracketed S/A lines. NO extra headings. NO markdown. NO colons after section headers. Each sentence on its own line.
+
+UNIQUENESS & SCOPE
+- Generate functionality specific to FOOD DELIVERY (customers, restaurants, riders/drivers, operations, support).
+- Do NOT duplicate or substantially overlap the titles/scopes listed below. If an idea is adjacent, merge it with alternatives under one use case rather than creating a duplicate.
+
+ALREADY COVERED — DO NOT REPEAT
+UC-1: Search for Restaurants and Food
+UC-2: Place a Food Order
+UC-3: Manage Restaurant Menu and Orders
+UC-4: Track Delivery Status
+UC-5: Rate and Review an Order
+UC-6: Onboard a New Restaurant Partner
+UC-7: Manage Delivery Tasks
+UC-8: Process a Customer Refund
+UC-9: Manage User Profile and Settings
+UC-10: View Order History
+UC-11: Customize Menu Item
+UC-12: Filter Menu Based on Allergens and Dietary Needs
+UC-13: Group Ordering / ”Cart Sharing”
+UC-14: Schedule an Order for Future Delivery
+UC-15: Transact WIC Electronic Benefits for an Online Order
+UC-16: Tipping the Delivery Partner
+UC-17: Reorder a Past Meal
+UC-18: Subscription Service for Free Delivery
+UC-19: Process Customer Refund or Credit
+UC-20: Onboard a New Delivery Partner
+UC-21: Manage Driver Vehicle and Insurance Verification
+UC-22: Facilitate Driver Training and Certification Programs
+UC-23: Manage Driver Availability and Tasks
+UC-24: Driver Manages In-Transit Delivery Problem
+UC-25: Onboard a Home Kitchen Partner
+UC-26: Manage Restaurant Menu and Availability
+UC-27: Fulfill an Order Using a Consumer-Owned Reusable Container
+UC-28: Restaurant Partner Posts Surplus Food for Donation
+UC-29: Administer a Corporate Meal Program
+UC-30: Coordinate Multi-Location Corporate Catering
+UC-31: Admin Implements a Driver Incentive Program
+UC-32: Monitor Fleet Performance and Analytics
+UC-33: Optimize Delivery Route Assignment
+UC-34: Manage Trust and Safety Incidents
+UC-35: Process an Electronic Benefit Return for an Unfulfilled Item
+
+VALIDATION BEFORE OUTPUT
+- Ensure each [S#] and [A#] referenced in Main Flow is defined once in the appropriate section.
+- Ensure no [S#]/[A#] appears in Subflows/Alternative Flows unless referenced in Main Flow.
+- Ensure headings are on their own lines with no trailing colon.
+- Ensure each Main Flow step is a single line ending with its bracketed refs.
+
+OUTPUT
+Produce only the 10 formatted use cases, nothing else.
+
+Convert the use cases in the CONTEXT into the format specified above. Only add what is missing, do not greatly alter the CONTEXT.
+
+CONTEXT:
+Attached PDF
+
+Claude:
+UC1 Search for Restaurants and Food
+Customers can discover and explore available restaurants and menu items based on location and search criteria.
+
+Preconditions
+Customer's device has an active internet connection
+Customer has granted the app location permissions or is prepared to enter an address manually
+
+Main Flow
+Customer opens the app [S1]
+System requests customer's current GPS location from device's operating system
+System sends location coordinates to server and displays list of restaurants that deliver to customer's location [A1]
+
+Subflows
+[S1] Customer enters keyword (e.g., "pizza") into search bar and system returns matching restaurants and menu items
+
+Alternative Flows
+[A1] If no restaurant partners deliver to specified address, system displays message informing user that no delivery is available in their area
+
+UC2 Place a Food Order
+Customers can complete a secure checkout process to purchase selected food items and generate revenue.
+
+Preconditions
+Customer is authenticated within the system
+Customer has at least one item in their cart
+
+Main Flow
+Customer reviews items in cart and proceeds to checkout
+System displays checkout screen with default delivery address, payment method, and itemized cost summary [S1]
+Customer clicks the "Place Order" button
+System sends payment details to Payment Gateway for authorization [A1]
+Upon success, system creates order, transmits it to Restaurant Partner, and displays "Order Confirmed" screen
+
+Subflows
+[S1] Customer enters valid promotion code and system validates code and applies discount to order summary
+
+Alternative Flows
+[A1] Payment Gateway returns "declined" response and system displays error message returning customer to checkout screen
+
+UC3 Manage Restaurant Menu and Orders
+Restaurant partners can control their online storefront, manage incoming orders, and communicate order status.
+
+Preconditions
+Restaurant has an active partnership with the platform
+Restaurant Manager or Staff is logged into the partner portal
+
+Main Flow
+System sends new order to restaurant's device with alert [S1]
+Restaurant Staff views and confirms the order
+Staff enters estimated preparation time
+System updates order status to "Preparing" and notifies Customer [A1]
+Once ready, staff marks order as "Ready for Pickup" which dispatches a Delivery Partner
+
+Subflows
+[S1] Restaurant Staff navigates to menu management and toggles item status to "Out of Stock" and system immediately removes item from customer-facing menu
+
+Alternative Flows
+[A1] New order is not acknowledged by staff within predefined time and system automatically rejects order and notifies Customer
+
+UC4 Track Delivery Status
+Customers and restaurants receive real-time visibility into order progress to increase trust and reduce anxiety.
+
+Preconditions
+Order has been successfully placed and confirmed
+Delivery Partner has their app open with location services enabled
+
+Main Flow
+System displays current order status (e.g., "Preparing")
+When order is ready, system assigns Delivery Partner and updates status [S1]
+After pickup, status changes to "Out for Delivery" and system displays driver's location on real-time map
+Delivery Partner confirms drop-off and system updates status to "Delivered" [A1]
+
+Subflows
+[S1] Customer taps "Contact Driver" to initiate anonymized phone call or chat to provide instructions
+
+Alternative Flows
+[A1] System's algorithm detects significant delay and automatically sends push notification to Customer with new ETA
+
+UC5 Rate and Review an Order
+Customers can provide feedback on their order and delivery experience for quality control and future customer guidance.
+
+Preconditions
+Customer has a completed order in their history that has not yet been rated
+
+Main Flow
+System prompts Customer to rate their recent order
+Customer selects star rating (1-5) for Restaurant/Food and another for Delivery [A1]
+Customer optionally types text review and taps "Submit"
+System saves feedback and displays confirmation message [A2]
+
+Subflows
+
+Alternative Flows
+[A1] If Customer provides low rating (1-2 stars), system displays list of common issues for selection and flags order for Customer Support review
+[A2] If submission fails due to network error, system displays error message and saves entered data locally for future attempt
+
+UC6 Onboard a New Restaurant Partner
+Restaurant owners can complete a streamlined self-service registration process to join the platform and expand food options.
+
+Preconditions
+Owner has a registered business, necessary permits, and digital menu
+
+Main Flow
+Restaurant Owner creates account
+Owner completes multi-step form entering business information, uploading legal documents, providing banking details, and creating menu [A1] [A2]
+Owner sets operating hours, reviews application, and submits it
+System validates application and sends it to admin review queue
+
+Subflows
+
+Alternative Flows
+[A1] Platform Admin reviews application and rejects it with specific reason and system emails owner with link to edit submission
+[A2] System's verification service cannot validate provided bank details and displays error message asking owner to double-check numbers
+
+UC7 Manage Delivery Tasks
+Delivery partners can accept, manage, and complete deliveries through a simple mobile interface critical for customer satisfaction.
+
+Preconditions
+Driver is logged in, online, and has location services enabled
+
+Main Flow
+System sends new delivery offer to driver's app [A1]
+Driver accepts offer within time limit
+Driver navigates to restaurant, confirms arrival, and confirms pickup of order in app [A2]
+System provides customer's address for navigation
+Driver travels to customer, confirms delivery is complete in app, and finishes task
+
+Subflows
+
+Alternative Flows
+[A1] Driver taps "Decline" or lets timer expire and system immediately offers delivery to next-best-available driver
+[A2] Driver arrives to find restaurant unexpectedly closed, reports it in app, and system cancels order, notifies customer, and issues driver compensatory payment
+
+UC8 Process a Customer Refund
+Customer support agents can investigate order issues and process refunds to turn negative experiences into retention opportunities.
+
+Preconditions
+Agent is logged into support panel
+Customer has a completed order
+
+Main Flow
+Customer Support Agent reviews new support ticket linked to order ID
+Agent reviews order details and determines complaint is valid
+Agent navigates to "Refund" section for order and selects items to refund or enters custom amount [S1]
+Agent submits refund which sends command to Payment Gateway [A1]
+Upon success, system logs action and notifies customer
+
+Subflows
+[S1] Instead of monetary refund, agent issues platform credit to customer's account wallet
+
+Alternative Flows
+[A1] System's fraud detection algorithm flags customer for high number of refund requests and displays warning to Agent who follows specialized investigation procedure
+
+UC9 Manage User Profile and Settings
+Customers can manage their personal information, addresses, and payment methods to reduce burden on customer support.
+
+Preconditions
+Customer is authenticated within the system
+
+Main Flow
+Customer navigates to Account screen and selects section such as "Saved Addresses"
+Customer taps "Add New Address"
+Customer fills out address form and saves it [S1]
+System validates address, adds it to customer's saved list, and displays confirmation [A1]
+
+Subflows
+[S1] Customer selects "Payment Methods" and taps "Add Payment", enters card details which system securely transmits to Payment Gateway to be tokenized and saved
+
+Alternative Flows
+[A1] Payment Gateway rejects card as invalid or expired and system displays error message asking user to check details
+
+UC10 View Order History
+Customers can access detailed records of past orders for easy reordering, expense tracking, and support requests.
+
+Preconditions
+Customer is authenticated
+Customer has placed at least one order in the past
+
+Main Flow
+Customer navigates to Order History screen
+System retrieves and displays chronological list of all past orders [S1] [A1]
+Customer taps on specific order
+System displays Order Detail screen with full itemized list, cost breakdown, and delivery information
+
+Subflows
+[S1] On Order Detail screen, Customer taps "Reorder" and system adds all items from that order into current cart and notifies user of any price or availability changes
+
+Alternative Flows
+[A1] System fails to retrieve order history due to server error and displays message asking user to try again
+
+
+CSC 510 (001): Software Engineering (Proj1c1) - Group3
+
+Aum Pandya, Pranav Bhagwat, Tayo Olokotun
+1 New Use Cases
+
+UC-1 Search for Restaurants and Food
+Customers can discover and explore available restaurants and menu items based on location and search criteria.
+Preconditions
+1.    Customer's device has an active internet connection
+2.    Customer has granted the app location permissions or is prepared to enter an address manually
+
+Main Flow
+1.    Customer opens the app [S1]
+2.    System requests customer's current GPS location from device's operating system
+3.    System sends location coordinates to server and displays list of restaurants that deliver to customer's location [A1]
+
+Subflows:
+1.    [S1] Customer enters keyword (e.g., "pizza") into search bar and system returns matching restaurants and menu items
+
+Alternative Flows:
+1.    [A1] If no restaurant partners deliver to specified address, system displays message informing user that no delivery is available in their area
+
+UC-2 Place a Food Order
+Customers can complete a secure checkout process to purchase selected food items and generate revenue.
+
+Preconditions
+1.    Customer is authenticated within the system
+2.    Customer has at least one item in their cart
+
+Main Flow
+1.    Customer reviews items in cart and proceeds to checkout
+2.    System displays checkout screen with default delivery address, payment method, and itemized cost summary [S1]
+3.    Customer clicks the "Place Order" button
+4.    System sends payment details to Payment Gateway for authorization [A1]
+5.    Upon success, system creates order, transmits it to Restaurant Partner, and displays "Order Confirmed" screen
+
+Subflows
+1.    [S1] Customer enters valid promotion code and system validates code and applies discount to order summary
+
+Alternative Flows
+1.    [A1] Payment Gateway returns "declined" response and system displays error message returning customer to checkout screen
+
+UC-3 Manage Restaurant Menu and Orders
+Restaurant partners can control their online storefront, manage incoming orders, and communicate order status.
+Preconditions
+1.    Restaurant has an active partnership with the platform
+2.    Restaurant Manager or Staff is logged into the partner portal
+
+Main Flow
+1.    System sends new order to restaurant's device with alert [S1]
+2.    Restaurant Staff views and confirms the order
+3.    Staff enters estimated preparation time
+4.    System updates order status to "Preparing" and notifies Customer [A1]
+5.    Once ready, staff marks order as "Ready for Pickup" which dispatches a Delivery Partner
+
+Subflows
+1.    [S1] Restaurant Staff navigates to menu management and toggles item status to "Out of Stock" and system immediately removes item from customer-facing menu
+
+Alternative Flows
+1.    [A1] New order is not acknowledged by staff within predefined time and system automatically rejects order and notifies Customer
+
+UC-4 Track Delivery Status
+Customers and restaurants receive real-time visibility into order progress to increase trust and reduce anxiety.
+
+Preconditions
+1.    Order has been successfully placed and confirmed
+2.    Delivery Partner has their app open with location services enabled
+
+Main Flow
+1.    System displays current order status (e.g., "Preparing")
+2.    When order is ready, system assigns Delivery Partner and updates status [S1]
+3.    After pickup, status changes to "Out for Delivery" and system displays driver's location on real-time map
+4.    Delivery Partner confirms drop-off and system updates status to "Delivered" [A1]
+
+Subflows
+1.    [S1] Customer taps "Contact Driver" to initiate anonymized phone call or chat to provide instructions
+
+Alternative Flows
+1.    [A1] System's algorithm detects significant delay and automatically sends push notification to Customer with new ETA
+
+UC-5 Rate and Review an Order
+Customers can provide feedback on their order and delivery experience for quality control and future customer guidance.
+
+Preconditions
+1.    Customer has a completed order in their history that has not yet been rated
+
+Main Flow
+1.    System prompts Customer to rate their recent order
+2.    Customer selects star rating (1-5) for Restaurant/Food and another for Delivery [A1]
+3.    Customer optionally types text review and taps "Submit"
+4.    System saves feedback and displays confirmation message [A2]
+
+
+Alternative Flows
+1.    [A1] If Customer provides low rating (1-2 stars), system displays list of common issues for selection and flags order for Customer Support review
+2.    [A2] If submission fails due to network error, system displays error message and saves entered data locally for future attempt
+
+UC-6 Onboard a New Restaurant Partner
+Restaurant owners can complete a streamlined self-service registration process to join the platform and expand food options.
+
+Preconditions
+1.    Owner has a registered business, necessary permits, and digital menu
+
+Main Flow
+1.    Restaurant Owner creates account
+2.    Owner completes multi-step form entering business information, uploading legal documents, providing banking details, and creating menu [A1] [A2]
+3.    Owner sets operating hours, reviews application, and submits it
+4.    System validates application and sends it to admin review queue
+
+Alternative Flows
+1.    [A1] Platform Admin reviews application and rejects it with specific reason and system emails owner with link to edit submission
+2.    [A2] System's verification service cannot validate provided bank details and displays error message asking owner to double-check numbers
+
+UC-7 Manage Delivery Tasks
+Delivery partners can accept, manage, and complete deliveries through a simple mobile interface critical for customer satisfaction.
+
+Preconditions
+1.    Driver is logged in, online, and has location services enabled
+
+Main Flow
+1.    System sends new delivery offer to driver's app [A1]
+2.    Driver accepts offer within time limit
+3.    Driver navigates to restaurant, confirms arrival, and confirms pickup of order in app [A2]
+4.    System provides customer's address for navigation
+5.    Driver travels to customer, confirms delivery is complete in app, and finishes task
+
+Alternative Flows
+1.    [A1] Driver taps "Decline" or lets timer expire and system immediately offers delivery to next-best-available driver
+2.    [A2] Driver arrives to find restaurant unexpectedly closed, reports it in app, and system cancels order, notifies customer, and issues driver compensatory payment
+
+UC-8 Process a Customer Refund
+Customer support agents can investigate order issues and process refunds to turn negative experiences into retention opportunities.
+
+Preconditions
+1.    Agent is logged into support panel
+2.    Customer has a completed order
+
+Main Flow
+1.    Customer Support Agent reviews new support ticket linked to order ID
+2.    Agent reviews order details and determines complaint is valid
+3.    Agent navigates to "Refund" section for order and selects items to refund or enters custom amount [S1]
+4.    Agent submits refund which sends command to Payment Gateway [A1]
+5.    Upon success, system logs action and notifies the customer.
+
+Subflows
+1.    [S1] Instead of monetary refund, agent issues platform credit to customer's account wallet
+
+Alternative Flows
+1.    [A1] System's fraud detection algorithm flags customer for high number of refund requests and displays warning to Agent who follows specialized investigation procedure
+
+UC-9 Manage User Profile and Settings
+Customers can manage their personal information, addresses, and payment methods to reduce burden on customer support.
+
+Preconditions
+1.    Customer is authenticated within the system
+
+Main Flow
+1.    Customer navigates to Account screen and selects section such as "Saved Addresses"
+2.    Customer taps "Add New Address"
+3.    Customer fills out address form and saves it [S1]
+4.    System validates address, adds it to customer's saved list, and displays confirmation [A1]
+
+Subflows
+1.     [S1] Customer selects "Payment Methods" and taps "Add Payment", enters card details which system securely transmits to Payment Gateway to be tokenized and saved
+
+Alternative Flows
+1.    [A1] Payment Gateway rejects card as invalid or expired and system displays error message asking user to check details
+
+UC-10 View Order History
+Customers can access detailed records of past orders for easy reordering, expense tracking, and support requests.
+
+Preconditions
+2.    Customer is authenticated
+3.    Customer has placed at least one order in the past
+
+Main Flow
+1.    Customer navigates to Order History screen
+2.    System retrieves and displays chronological list of all past orders [S1] [A1]
+3.    Customer taps on specific order
+4.    System displays Order Detail screen with full itemized list, cost breakdown, and delivery information
+
+Subflows
+1.     [S1] On Order Detail screen, Customer taps "Reorder" and system adds all items from that order into current cart and notifies user of any price or availability changes
+
+Alternative Flows
+1.    [A1] System fails to retrieve order history due to server error and displays message asking user to try again
+
+UC-11 Apply Promotional Codes and Discounts
+Customer applies promotional codes or discounts during checkout to reduce order cost.
+Preconditions:
+1.    Customer has items in cart and proceeds to checkout.
+2.    Valid promotional codes exist in the system.
+3.    Customer has an active internet connection.
+
+Main Flow:
+1.    Customer reviews order summary on checkout screen [S1]
+2.    Customer enters promotional code in designated field [S2] [A1]
+3.    System validates promotional code and applies discount [S3] [A2]
+4.    Customer confirms updated order total and completes payment [A3]
+
+Subflows:
+1.    [S1] System displays itemized order summary with subtotal, taxes, and delivery fees
+2.    [S2] Customer types or pastes promotional code into text input field
+3.    [S3] System recalculates order total with discount applied and shows savings amount
+
+Alternative Flows:
+1.    [A1] Customer selects from list of available promotions instead of entering code manually
+2.    [A2] System rejects invalid or expired promotional code and displays error message
+3.    [A3] Customer abandons checkout if final discounted price is still unsatisfactory
+
+UC-12: Reorder a Past Meal
+To provide customers with a quick and convenient way to reorder their favorite meals, increasing order frequency and user retention.
+Preconditions:
+1.    The Customer is authenticated and has at least one completed order.
+Main Flow (Basic Flow):
+1.    The Customer navigates to their ”Order History” screen.
+2.    The Customer selects a specific past order to view its details.
+3.    On the Order Detail screen, the Customer taps the ”Reorder” button.
+4.    The System adds all items from that past order into the customer’s current cart.
+5.    The System navigates the Customer to the cart view to review the items before checkout.
+ Alternative & Exception Flows:
+1.    [A1] Reorder with Unavailable Items: If some items from the past order are no longer available, the System adds only the available items to the cart and displays a notification to the user about which items could not be added.
+2.    [A2] Reorder with Price Changes: If prices have changed since the original order, the System adds the items to the cart with their current prices and displays a notification to the user about the price updates
+
+2 Reflection
+
+LLMs used: Gemini, ChatGPT and Claude
+How did you decide what NOT to do?
+The key concerns when designing the MVP (Minimum Viable Product) were simultaneously feasibility and stakeholder satisfaction. In a Food Delivery System, the primary stakeholder is the User followed by the Restaurant, as without these 2 key actors the system falls apart.
+Hence, the use cases that satisfy the base cases of a Food Delivery System involving both the User and the Restaurant were considered for the MVP.
+This includes use cases such as order placement, reordering past meals and order cancellations among others for the User, and restaurant registration and delivery management for the Restaurant as well as the Food Delivery System.
+
+ 1. List of stakeholders
+ 1.1. Core Marketplace Stakeholders
+ These are the essential participants whose interactions define the food delivery service.
+ • Customers & End-Users: Individuals and groups who order food.
+ • Restaurant Partners: Businesses that prepare and sell the food.
+ • Delivery Partners: The individuals and companies that transport the food.
+ 1.2. Internal Platform Stakeholders
+ These are the teams and individuals employed by the food delivery company itself.
+ • Executive Leadership & Board: Sets strategy, secures funding, and provides governance.
+ • Product & Technology Teams: Build and maintain the platform.
+ • Operations & Support Teams: Manage the day-to-day marketplace functions.
+ • Growth & Corporate Teams: Drive business expansion and provide administrative support.
+ 1.3. Ecosystem & Partner Stakeholders
+ These are the external third-party entities the platform relies on to function and grow.
+ • Technology & Infrastructure Partners: Cloud providers (AWS, Google Cloud), mapping services (Google
+ Maps), payment gateways (Stripe, PayPal), and communication services (Twilio) that enable core platform func
+tionality.
+ • Financial & Strategic Partners: Investors, shareholders, banks, insurance providers, and marketing affiliates
+ that provide capital, financial services, and user acquisition support.
+ • Supply Chain & Logistics Partners: Foodandpackaging suppliers for restaurants, plus vehicle and maintenance
+ partners that support delivery operations.
+ 1.4. Regulatory & Societal Stakeholders
+ These are the broader governing bodies and groups that shape the market and grant the license to operate.
+ • Government & Regulatory Bodies: Local, state, and federal authorities, health agencies, and labor protection
+ agencies that enforce permits, taxes, food safety, and worker rights.
+ • Advocacy & Community Groups: Trade unions, neighborhood associations, and environmental groups that
+ advocate for worker rights, community impact management, and sustainable practices.
+ • Market-at-Large: Competitors, media, press, food bloggers, and influencers that shape market expectations,
+ public perception, and food trends.
+Given the above context, answer: What negative impacts or disappointments this MVP could have for your stakeholders?
+
+Based on the MVP use cases provided, here are the potential negative impacts and disappointments for each stakeholder group:
+
+Core Marketplace Stakeholders
+Customers & End-Users:
+
+Limited functionality may feel basic compared to established competitors like DoorDash or Uber Eats
+No advanced features like group ordering, scheduled deliveries, or dietary filtering could frustrate users with specific needs
+Basic promotional system (UC-11) may lack sophisticated loyalty programs or personalized offers
+Missing accessibility features could exclude users with disabilities
+No live chat or comprehensive support system beyond basic refunds
+Restaurant Partners:
+
+Limited menu management capabilities may not support complex restaurant operations (multiple locations, seasonal menus, inventory tracking)
+Basic onboarding process may not accommodate restaurants with unique requirements or compliance needs
+No advanced analytics or sales reporting to help restaurants optimize their offerings
+Lack of marketing tools to help restaurants promote themselves on the platform
+No integration with existing restaurant POS systems, creating operational friction
+Delivery Partners:
+
+Basic delivery task management may not include route optimization, earnings tracking, or shift scheduling
+No advanced safety features like emergency contacts or incident reporting
+Missing vehicle maintenance tracking or expense management tools
+No performance metrics or feedback system to help drivers improve
+Limited dispute resolution process for delivery issues
+Internal Platform Stakeholders
+Executive Leadership & Board:
+
+Limited scalability features may hinder rapid market expansion
+Basic analytics may not provide sufficient business intelligence for strategic decisions
+No advanced fraud detection or risk management systems
+Missing competitive differentiation features that could impact market positioning
+Product & Technology Teams:
+
+Technical debt may accumulate quickly with basic implementations
+Limited monitoring and analytics tools for system performance optimization
+No A/B testing framework for feature optimization
+Basic architecture may not support future feature additions efficiently
+Operations & Support Teams:
+
+Manual refund process (UC-8) will not scale efficiently with user growth
+Limited customer support tools may lead to poor resolution times
+No automated dispute resolution or escalation systems
+Basic reporting may not provide operational insights needed for process improvement
+Ecosystem & Partner Stakeholders
+Technology & Infrastructure Partners:
+
+Basic integrations may require significant customization work
+Limited API functionality may restrict partnership opportunities
+No advanced security features may concern enterprise partners
+Financial & Strategic Partners:
+
+Basic payment processing may not support diverse payment methods or international expansion
+Limited financial reporting may not meet investor or regulatory requirements
+No fraud prevention systems could increase financial risk
+Regulatory & Societal Stakeholders
+Government & Regulatory Bodies:
+
+Basic tax handling may not comply with complex multi-jurisdiction requirements
+Limited data protection and privacy controls may not meet regulatory standards
+No labor compliance tracking for delivery partners
+Missing accessibility compliance features
+Advocacy & Community Groups:
+
+No sustainability features (eco-friendly packaging, carbon footprint tracking) may disappoint environmental advocates
+Basic worker protections for delivery partners may concern labor rights groups
+No community impact features (supporting local businesses, donation programs)
+Additional Systemic Issues
+Market Competitiveness:
+
+The MVP may appear outdated compared to feature-rich competitors
+Lack of innovative features may make it difficult to attract users from established platforms
+Basic user experience may result in high churn rates
+Scalability Concerns:
+
+Manual processes will become bottlenecks as the platform grows
+Basic architecture may require significant rebuilding for expansion
+Limited automation may increase operational costs disproportionately
+The MVP focuses heavily on core transactional functionality but lacks many features that stakeholders have come to expect from modern food delivery platforms, potentially limiting adoption and satisfaction across all stakeholder groups.
+
+
+CSC 510 (001): Software Engineering (Proj1c1) - Group3
+
+Aum Pandya, Pranav Bhagwat, Tayo Olokotun
+1 New Use Cases
+
+UC-1 Search for Restaurants and Food
+Customers can discover and explore available restaurants and menu items based on location and search criteria.
+Preconditions
+1.    Customer's device has an active internet connection
+2.    Customer has granted the app location permissions or is prepared to enter an address manually
+
+Main Flow
+1.    Customer opens the app [S1]
+2.    System requests customer's current GPS location from device's operating system
+3.    System sends location coordinates to server and displays list of restaurants that deliver to customer's location [A1]
+
+Subflows:
+1.    [S1] Customer enters keyword (e.g., "pizza") into search bar and system returns matching restaurants and menu items
+
+Alternative Flows:
+1.    [A1] If no restaurant partners deliver to specified address, system displays message informing user that no delivery is available in their area
+
+UC-2 Place a Food Order
+Customers can complete a secure checkout process to purchase selected food items and generate revenue.
+
+Preconditions
+1.    Customer is authenticated within the system
+2.    Customer has at least one item in their cart
+
+Main Flow
+1.    Customer reviews items in cart and proceeds to checkout
+2.    System displays checkout screen with default delivery address, payment method, and itemized cost summary [S1]
+3.    Customer clicks the "Place Order" button
+4.    System sends payment details to Payment Gateway for authorization [A1]
+5.    Upon success, system creates order, transmits it to Restaurant Partner, and displays "Order Confirmed" screen
+
+Subflows
+1.    [S1] Customer enters valid promotion code and system validates code and applies discount to order summary
+
+Alternative Flows
+1.    [A1] Payment Gateway returns "declined" response and system displays error message returning customer to checkout screen
+
+UC-3 Manage Restaurant Menu and Orders
+Restaurant partners can control their online storefront, manage incoming orders, and communicate order status.
+Preconditions
+1.    Restaurant has an active partnership with the platform
+2.    Restaurant Manager or Staff is logged into the partner portal
+
+Main Flow
+1.    System sends new order to restaurant's device with alert [S1]
+2.    Restaurant Staff views and confirms the order
+3.    Staff enters estimated preparation time
+4.    System updates order status to "Preparing" and notifies Customer [A1]
+5.    Once ready, staff marks order as "Ready for Pickup" which dispatches a Delivery Partner
+
+Subflows
+1.    [S1] Restaurant Staff navigates to menu management and toggles item status to "Out of Stock" and system immediately removes item from customer-facing menu
+
+Alternative Flows
+1.    [A1] New order is not acknowledged by staff within predefined time and system automatically rejects order and notifies Customer
+
+UC-4 Track Delivery Status
+Customers and restaurants receive real-time visibility into order progress to increase trust and reduce anxiety.
+
+Preconditions
+1.    Order has been successfully placed and confirmed
+2.    Delivery Partner has their app open with location services enabled
+
+Main Flow
+1.    System displays current order status (e.g., "Preparing")
+2.    When order is ready, system assigns Delivery Partner and updates status [S1]
+3.    After pickup, status changes to "Out for Delivery" and system displays driver's location on real-time map
+4.    Delivery Partner confirms drop-off and system updates status to "Delivered" [A1]
+
+Subflows
+1.    [S1] Customer taps "Contact Driver" to initiate anonymized phone call or chat to provide instructions
+
+Alternative Flows
+1.    [A1] System's algorithm detects significant delay and automatically sends push notification to Customer with new ETA
+
+UC-5 Rate and Review an Order
+Customers can provide feedback on their order and delivery experience for quality control and future customer guidance.
+
+Preconditions
+1.    Customer has a completed order in their history that has not yet been rated
+
+Main Flow
+1.    System prompts Customer to rate their recent order
+2.    Customer selects star rating (1-5) for Restaurant/Food and another for Delivery [A1]
+3.    Customer optionally types text review and taps "Submit"
+4.    System saves feedback and displays confirmation message [A2]
+
+
+Alternative Flows
+1.    [A1] If Customer provides low rating (1-2 stars), system displays list of common issues for selection and flags order for Customer Support review
+2.    [A2] If submission fails due to network error, system displays error message and saves entered data locally for future attempt
+
+UC-6 Onboard a New Restaurant Partner
+Restaurant owners can complete a streamlined self-service registration process to join the platform and expand food options.
+
+Preconditions
+1.    Owner has a registered business, necessary permits, and digital menu
+
+Main Flow
+1.    Restaurant Owner creates account
+2.    Owner completes multi-step form entering business information, uploading legal documents, providing banking details, and creating menu [A1] [A2]
+3.    Owner sets operating hours, reviews application, and submits it
+4.    System validates application and sends it to admin review queue
+
+Alternative Flows
+1.    [A1] Platform Admin reviews application and rejects it with specific reason and system emails owner with link to edit submission
+2.    [A2] System's verification service cannot validate provided bank details and displays error message asking owner to double-check numbers
+
+UC-7 Manage Delivery Tasks
+Delivery partners can accept, manage, and complete deliveries through a simple mobile interface critical for customer satisfaction.
+
+Preconditions
+1.    Driver is logged in, online, and has location services enabled
+
+Main Flow
+1.    System sends new delivery offer to driver's app [A1]
+2.    Driver accepts offer within time limit
+3.    Driver navigates to restaurant, confirms arrival, and confirms pickup of order in app [A2]
+4.    System provides customer's address for navigation
+5.    Driver travels to customer, confirms delivery is complete in app, and finishes task
+
+Alternative Flows
+1.    [A1] Driver taps "Decline" or lets timer expire and system immediately offers delivery to next-best-available driver
+2.    [A2] Driver arrives to find restaurant unexpectedly closed, reports it in app, and system cancels order, notifies customer, and issues driver compensatory payment
+
+UC-8 Process a Customer Refund
+Customer support agents can investigate order issues and process refunds to turn negative experiences into retention opportunities.
+
+Preconditions
+1.    Agent is logged into support panel
+2.    Customer has a completed order
+
+Main Flow
+1.    Customer Support Agent reviews new support ticket linked to order ID
+2.    Agent reviews order details and determines complaint is valid
+3.    Agent navigates to "Refund" section for order and selects items to refund or enters custom amount [S1]
+4.    Agent submits refund which sends command to Payment Gateway [A1]
+5.    Upon success, system logs action and notifies the customer.
+
+Subflows
+1.    [S1] Instead of monetary refund, agent issues platform credit to customer's account wallet
+
+Alternative Flows
+1.    [A1] System's fraud detection algorithm flags customer for high number of refund requests and displays warning to Agent who follows specialized investigation procedure
+
+UC-9 Manage User Profile and Settings
+Customers can manage their personal information, addresses, and payment methods to reduce burden on customer support.
+
+Preconditions
+1.    Customer is authenticated within the system
+
+Main Flow
+1.    Customer navigates to Account screen and selects section such as "Saved Addresses"
+2.    Customer taps "Add New Address"
+3.    Customer fills out address form and saves it [S1]
+4.    System validates address, adds it to customer's saved list, and displays confirmation [A1]
+
+Subflows
+1.     [S1] Customer selects "Payment Methods" and taps "Add Payment", enters card details which system securely transmits to Payment Gateway to be tokenized and saved
+
+Alternative Flows
+1.    [A1] Payment Gateway rejects card as invalid or expired and system displays error message asking user to check details
+
+UC-10 View Order History
+Customers can access detailed records of past orders for easy reordering, expense tracking, and support requests.
+
+Preconditions
+2.    Customer is authenticated
+3.    Customer has placed at least one order in the past
+
+Main Flow
+1.    Customer navigates to Order History screen
+2.    System retrieves and displays chronological list of all past orders [S1] [A1]
+3.    Customer taps on specific order
+4.    System displays Order Detail screen with full itemized list, cost breakdown, and delivery information
+
+Subflows
+1.     [S1] On Order Detail screen, Customer taps "Reorder" and system adds all items from that order into current cart and notifies user of any price or availability changes
+
+Alternative Flows
+1.    [A1] System fails to retrieve order history due to server error and displays message asking user to try again
+
+UC-11 Apply Promotional Codes and Discounts
+Customer applies promotional codes or discounts during checkout to reduce order cost.
+Preconditions:
+1.    Customer has items in cart and proceeds to checkout.
+2.    Valid promotional codes exist in the system.
+3.    Customer has an active internet connection.
+
+Main Flow:
+1.    Customer reviews order summary on checkout screen [S1]
+2.    Customer enters promotional code in designated field [S2] [A1]
+3.    System validates promotional code and applies discount [S3] [A2]
+4.    Customer confirms updated order total and completes payment [A3]
+
+Subflows:
+1.    [S1] System displays itemized order summary with subtotal, taxes, and delivery fees
+2.    [S2] Customer types or pastes promotional code into text input field
+3.    [S3] System recalculates order total with discount applied and shows savings amount
+
+Alternative Flows:
+1.    [A1] Customer selects from list of available promotions instead of entering code manually
+2.    [A2] System rejects invalid or expired promotional code and displays error message
+3.    [A3] Customer abandons checkout if final discounted price is still unsatisfactory
+
+UC-12: Reorder a Past Meal
+To provide customers with a quick and convenient way to reorder their favorite meals, increasing order frequency and user retention.
+Preconditions:
+1.    The Customer is authenticated and has at least one completed order.
+Main Flow (Basic Flow):
+1.    The Customer navigates to their ”Order History” screen.
+2.    The Customer selects a specific past order to view its details.
+3.    On the Order Detail screen, the Customer taps the ”Reorder” button.
+4.    The System adds all items from that past order into the customer’s current cart.
+5.    The System navigates the Customer to the cart view to review the items before checkout.
+ Alternative & Exception Flows:
+1.    [A1] Reorder with Unavailable Items: If some items from the past order are no longer available, the System adds only the available items to the cart and displays a notification to the user about which items could not be added.
+2.    [A2] Reorder with Price Changes: If prices have changed since the original order, the System adds the items to the cart with their current prices and displays a notification to the user about the price updates
+
+2 Reflection
+
+LLMs used: Gemini, ChatGPT and Claude
+How did you decide what NOT to do?
+The key concerns when designing the MVP (Minimum Viable Product) were simultaneously feasibility and stakeholder satisfaction. In a Food Delivery System, the primary stakeholder is the User followed by the Restaurant, as without these 2 key actors the system falls apart.
+Hence, the use cases that satisfy the base cases of a Food Delivery System involving both the User and the Restaurant were considered for the MVP.
+This includes use cases such as order placement, reordering past meals and order cancellations among others for the User, and restaurant registration and delivery management for the Restaurant as well as the Food Delivery System.
+
+ 1. List of stakeholders
+ 1.1. Core Marketplace Stakeholders
+ These are the essential participants whose interactions define the food delivery service.
+ • Customers & End-Users: Individuals and groups who order food.
+ • Restaurant Partners: Businesses that prepare and sell the food.
+ • Delivery Partners: The individuals and companies that transport the food.
+ 1.2. Internal Platform Stakeholders
+ These are the teams and individuals employed by the food delivery company itself.
+ • Executive Leadership & Board: Sets strategy, secures funding, and provides governance.
+ • Product & Technology Teams: Build and maintain the platform.
+ • Operations & Support Teams: Manage the day-to-day marketplace functions.
+ • Growth & Corporate Teams: Drive business expansion and provide administrative support.
+ 1.3. Ecosystem & Partner Stakeholders
+ These are the external third-party entities the platform relies on to function and grow.
+ • Technology & Infrastructure Partners: Cloud providers (AWS, Google Cloud), mapping services (Google
+ Maps), payment gateways (Stripe, PayPal), and communication services (Twilio) that enable core platform func
+tionality.
+ • Financial & Strategic Partners: Investors, shareholders, banks, insurance providers, and marketing affiliates
+ that provide capital, financial services, and user acquisition support.
+ • Supply Chain & Logistics Partners: Foodandpackaging suppliers for restaurants, plus vehicle and maintenance
+ partners that support delivery operations.
+ 1.4. Regulatory & Societal Stakeholders
+ These are the broader governing bodies and groups that shape the market and grant the license to operate.
+ • Government & Regulatory Bodies: Local, state, and federal authorities, health agencies, and labor protection
+ agencies that enforce permits, taxes, food safety, and worker rights.
+ • Advocacy & Community Groups: Trade unions, neighborhood associations, and environmental groups that
+ advocate for worker rights, community impact management, and sustainable practices.
+ • Market-at-Large: Competitors, media, press, food bloggers, and influencers that shape market expectations,
+ public perception, and food trends.
+Given the above context, answer: What changes you made (and why) to the MVP to appease at least some of the stakeholders?
+
+Based on the provided context, I can identify several key changes made to the MVP to address stakeholder concerns:
+
+Changes Made to Appease Stakeholders
+1. Enhanced Customer Experience (UC-11: Apply Promotional Codes and Discounts)
+Change: Added comprehensive promotional code functionality beyond the basic discount in UC-2 Why: This addresses customer price sensitivity and competitive pressure. The alternative flow [A1] allowing customers to select from available promotions shows consideration for user experience, while [A3] acknowledging checkout abandonment recognizes real customer behavior patterns.
+
+2. Improved Customer Retention (UC-12: Reorder a Past Meal)
+Change: Created a dedicated reordering feature separate from the basic order history view in UC-10 Why: This directly addresses customer convenience and platform revenue goals. The alternative flows [A1] and [A2] show awareness of real-world complications (unavailable items, price changes) that could frustrate customers, demonstrating stakeholder-focused design thinking.
+
+3. Enhanced Restaurant Partner Support
+Change: In UC-3, added subflow [S1] for real-time menu management (out-of-stock toggles) Why: This addresses restaurant partners' need for operational control and reduces customer frustration from ordering unavailable items. The automatic removal from customer-facing menus shows consideration for both restaurant efficiency and customer experience.
+
+4. Improved Delivery Partner Experience
+Change: In UC-7, added comprehensive alternative flows [A1] for declining deliveries and [A2] for handling restaurant closures with compensatory payment Why: This addresses delivery partners' need for flexibility while providing financial protection for situations beyond their control, showing consideration for the gig economy model's challenges.
+
+5. Customer Support Enhancements
+Change: In UC-8, added subflow [S1] for platform credit alternatives and alternative flow [A1] for fraud detection Why: This addresses multiple stakeholder concerns - customers get flexible refund options, the platform reduces cash outflow through credits, and investors are protected through fraud prevention measures.
+
+6. Proactive Communication Features
+Change: Enhanced UC-4 with customer-driver communication [S1] and automatic delay notifications [A1] Why: This addresses trust and transparency concerns from customers while reducing support burden on internal teams.
+
+Strategic Rationale
+The team clearly prioritized changes that:
+
+Serve multiple stakeholders simultaneously (e.g., promotional codes benefit customers and drive platform revenue)
+Address operational realities (item unavailability, price changes, restaurant closures)
+Reduce manual intervention needs (automatic notifications, real-time menu updates)
+Build competitive differentiation (enhanced reordering, comprehensive promotional system)
+Notable Limitations
+However, the MVP still lacks several features that would appease other stakeholder groups:
+
+No advanced analytics for restaurants or executives
+Limited regulatory compliance features
+Missing accessibility considerations
+Basic delivery partner tools without route optimization
+No sustainability features for advocacy groups
+The changes show a pragmatic approach focused on core user flows while acknowledging real-world complications, but the MVP remains fundamentally transaction-focused rather than addressing broader stakeholder ecosystem needs.
+
+
+
+
+
